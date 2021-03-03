@@ -1,0 +1,13 @@
+strong {text-align: center;}
+head {text-align: center;}
+div {text-align: center; font-size: large;}
+br {text-align: center;}
+body {text-align: center;}
+span, input {margin: px;}
+.custom-div{padding-top: 10px;}
+button{display:inline-block;}
+h1{padding-top: 15px;}
+.alert {
+    display: inline-block;
+    width:15%;    
+ }

@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import "./App.css"
+import * as ReactBootStrap from "react-bootstrap";
+import Navbar from "./component/Navbar";
+import MainPageProducts from "./component/MainPageProducts";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  BrowswerHistory,
+  Link
+} from "react-router-dom";
+import Details from './component/Details';
+import LoginComponent from './component/LoginComponent';
+import LogoutComponent from './component/LogoutComponent';
+import Cart from './component/Cart';
+import Admin from './component/Admin';
+import EditAlbumComponent from './component/EditAlbumComponent';
+// import { createHistory } from 'history/createBrowserHistory';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const NavBar = () => {
+    return(
+        <div className="App">
+        <Router>
+            <Navbar  component={() => NavBar}/>
+         <Switch>
+          <Route path="/Login" component={LoginComponent}/>    
+          <Route path="/cart" component={Cart}/>
+          <Route path="/admin" component={Admin}/>
+          <Route path="/edit/:id" component={EditAlbumComponent}/>
+          <Route path="/logout" component={LogoutComponent}/>
+          <Route path="/details" component={Details}/>
+          <Route path="/" component={() => MainPageProducts}>
+            <MainPageProducts />
+          </Route>
+        </Switch>
+    </Router>
+        </div>
+    )
 }
 
-export default App;
+export default NavBar;
