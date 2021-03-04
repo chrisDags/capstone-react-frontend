@@ -11,7 +11,7 @@ class ApiService extends Component{
 
     getAlbumById(id){
         let token = sessionStorage.getItem('token')
-        return axios.get(`http://localhost:8080/albums/lol/${id}`, {headers: {"Authorization": `${token}`}})
+        return axios.get(`http://localhost:8080/albums/test/${id}`, {headers: {"Authorization": `${token}`}})
     }
 
     putChanges(id){
