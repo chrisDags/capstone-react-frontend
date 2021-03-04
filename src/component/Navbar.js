@@ -5,6 +5,9 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import Cart from "./Cart";
 import ApiService from "./ApiService.jsx";
 import LogoutComponent from "./LogoutComponent";
+import { faShoppingCart} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 const NavBar = () => {
 
@@ -34,9 +37,9 @@ const NavBar = () => {
         <ReactBootStrap.Navbar.Collapse   id="responsive-navbar-nav">
           <ReactBootStrap.Nav style={{marginLeft:'5%'}} className="mr-auto">
           
-            <Link to="/cart">
-              <ReactBootStrap.Nav.Link style={{color:'whitesmoke'}}  href="#all">
-               Cart
+            <Link to="/cart" >
+              <ReactBootStrap.Nav.Link style={{color:'whitesmoke'}} href="#all">
+                    <FontAwesomeIcon icon={faShoppingCart} transform="down-4 grow-2.5" color="yellow"/>
               </ReactBootStrap.Nav.Link>
             </Link>
             
@@ -46,15 +49,18 @@ const NavBar = () => {
               </ReactBootStrap.Nav.Link>
             </Link>
 
-            <Link to="/admin">
+            {/* <Link to="/admin">
               <ReactBootStrap.Nav.Link style={{color:'whitesmoke'}}  href="#all">
                Admin
               </ReactBootStrap.Nav.Link>
-            </Link>
+            </Link> */}
 
             {/* {this.state.hasLoginFailed && <div className="alert alert-danger">Invalid Credentials</div>} */}
           <Link to="/login"><ReactBootStrap.Nav.Link style={{color:'whitesmoke'}} href="#all">Login</ReactBootStrap.Nav.Link></Link>
           {ApiService.isLoginSuccessfulJwt() && <Link to="/" onClick={toggleMe}><ReactBootStrap.Nav.Link style={{color:'whitesmoke'}} href="#all">Logout</ReactBootStrap.Nav.Link></Link>}
+          {sessionStorage.getItem('isUserAdmin') && <Link to="/admin"><ReactBootStrap.Nav.Link style={{color:'whitesmoke'}}  href="#all"> Admin </ReactBootStrap.Nav.Link></Link>}
+          
+          
 
           </ReactBootStrap.Nav>
           <ReactBootStrap.Nav>

@@ -3,11 +3,12 @@ import "./Box.css";
 import { Card } from "react-bootstrap";
 import axios from "axios";
 import ApiService from './ApiService.jsx'
-import { Redirect, useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import SearchField from "react-search-field";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngry, faBan, faBarcode, faCode, faCross, faEdit, faEyeDropper, faHighlighter, faSkullCrossbones, faTrash } from '@fortawesome/free-solid-svg-icons';
+
 
 const Cart = () => {
     const [albums, setAlbums] = useState([]);
@@ -18,8 +19,8 @@ const Cart = () => {
     var id = 0;
     username = ApiService.getUsername();
     
-    const history = useHistory();
 
+    const history = useHistory();
     const items = 0;
     const [currentTotal, setCurrentTotal] = React.useState(0);
 
@@ -102,7 +103,7 @@ const Cart = () => {
       <>
       {didUserLogin === false && <div style={{paddingTop: '55px'}}><h1>Please Login</h1> <button className="btn btn-primary" onClick={ () => history.push('/login')}>Login Page</button> </div>}
       {didUserLogin && <div> <h1 style={{paddingTop: '100px'}}> {username}'s Cart</h1></div>}
-      {didUserLogin && <div><table className="table table-striped" style={{width: '70%', marginLeft: 'auto', marginRight: 'auto' }}><thead className="thead-dark"><tr><th>#</th> <th>TITLE</th><th>FORMAT</th><th>PRICE</th> <th>QUANTITY</th><th>STOCK</th><th></th></tr></thead>{albums.map(renderCard)}</table><div style={{color: 'darkRed'}}><b>Your Total ${total}</b></div><button className="btn btn-success">Checkout</button></div>}
+      {didUserLogin && <div><table className="table table-striped" style={{width: '70%', marginLeft: 'auto', marginRight: 'auto' }}><thead className="thead-dark"><tr><th>#</th> <th>TITLE</th><th>FORMAT</th><th>PRICE</th> <th>QUANTITY</th><th>STOCK</th><th></th></tr></thead>{albums.map(renderCard)}</table><div style={{color: 'darkRed'}}><b>Your Total ${total}</b></div><button onClick={() => history.push("/checkout")}className="btn btn-success">Checkout</button></div>}
       
     </>
     )

@@ -13,9 +13,10 @@ import {
 import Details from './component/Details';
 import LoginComponent from './component/LoginComponent';
 import LogoutComponent from './component/LogoutComponent';
-import Cart from './component/Cart';
+import Cart from './component/Cart.js';
 import Admin from './component/Admin';
 import EditAlbumComponent from './component/EditAlbumComponent';
+import CheckoutComponent from './component/CheckoutComponent';
 // import { createHistory } from 'history/createBrowserHistory';
 
 
@@ -31,6 +32,7 @@ const NavBar = () => {
           <Route path="/edit/:id" component={EditAlbumComponent}/>
           <Route path="/logout" component={LogoutComponent}/>
           <Route path="/details" component={Details}/>
+          <Route path="/checkout" component={CheckoutComponent}/>
           <Route path="/" component={() => MainPageProducts}>
             <MainPageProducts />
           </Route>

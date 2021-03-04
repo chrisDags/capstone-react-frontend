@@ -17,6 +17,7 @@ class LoginComponent extends Component{
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
+        this.handleValidation = this.handleValidation.bind(this)
     }
     shouldComponentUpdate(nextProps, nextState){
         return true
@@ -43,7 +44,7 @@ class LoginComponent extends Component{
       };
 
 
-    handleLogin(){
+     async handleLogin(){
         // ApiService.sendLoginRequest(this.state.username, this.state.password)
         //     .then(response => {
         //         console.log(this.state.username)
@@ -56,20 +57,74 @@ class LoginComponent extends Component{
         //         this.setState({hasLoginFailed: true})
         //     })
 
-        ApiService.sendLoginRequestJwt(this.state.username, this.state.password)
+       await ApiService.sendLoginRequestJwt(this.state.username, this.state.password)
         .then(response => {
             console.log(this.state.username)
             console.log(this.state.password)
             ApiService.registerSuccessfulLoginJwt(this.state.username, response.data.jwt);
+
+            ApiService.getIsUserAdmin().then(response =>{
+
+                sessionStorage.setItem('isUserAdmin', true) 
+                 console.log(response.data)
+                 this.props.history.push('/')
+                 window.location.reload(false);
+                 
+             }).catch(() =>{
+                 this.props.history.push('/')
+                 window.location.reload(false);
+             })
+     
+            //   this.props.history.push('/')
+
+
+            // this.props.history.push("/")
             
-            console.log(response.data.jwt)
-            this.props.history.push('/')
-            window.location.reload(false);
+            // console.log(response.data.jwt)
 
         }).catch(()=>{
             this.setState({hasLoginFailed: true})
         })
-    }  
+
+        // if(this.state.hasLoginFailed){
+        //     return
+        // }else{
+        //     this.handleValidation()
+        // }
+
+    //    await ApiService.getIsUserAdmin().then(response =>{
+
+    //        sessionStorage.setItem('isUserAdmin', true) 
+    //         console.log(response.data)
+    //         this.props.history.push('/')
+    //         window.location.reload(false);
+            
+    //     }).catch(() =>{
+    //         this.props.history.push('/')
+    //     })
+
+    //      this.props.history.push('/')
+    //      window.location.reload(false);
+      
+    } 
+    
+    handleValidation(){
+    //    ApiService.getIsUserAdmin().then(response =>{
+
+    //         sessionStorage.setItem('isUserAdmin', true) 
+    //          console.log(response.data)
+    //          this.props.history.push('/')
+    //          window.location.reload(false);
+             
+    //      }).catch(() =>{
+    //          this.props.history.push('/')
+    //          window.location.reload(false);
+    //      })
+ 
+    //       this.props.history.push('/')
+          //window.location.reload(false);
+
+    }
     
     render(){
                 return(

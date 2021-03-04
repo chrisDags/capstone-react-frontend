@@ -9,14 +9,39 @@ class ApiService extends Component{
     }
 
 
+    createNewOrder(creditCard, creditCardName, cvv, expirationDate, shippingAddress, billingAddress){
+        let token = sessionStorage.getItem('token')
+        return axios.post("http://localhost:8080/order", {
+            creditCard,
+            creditCardName,
+            cvv,
+            expirationDate,
+            shippingAddress,
+            billingAddress
+        },{headers: {"Authorization": `${token}`}})
+    }
+
+    getIsUserAdmin(){
+        let token = sessionStorage.getItem('token')
+        return axios.get("http://localhost:8080/validate", {headers: {"Authorization": `${token}`}})
+    }
+
     getAlbumById(id){
         let token = sessionStorage.getItem('token')
         return axios.get(`http://localhost:8080/albums/test/${id}`, {headers: {"Authorization": `${token}`}})
     }
 
-    putChanges(id){
+    putChanges(id, title, artist, description, price, genre, format, stock){
         let token = sessionStorage.getItem('token')
-        return axios.post(`http://localhost:8080/albums/${id}`, {headers: {"Authorization": `${token}`}})
+        return axios.put(`http://localhost:8080/albums/${id}`, {
+            title,    
+            artist,
+            description,
+            price,
+            genre,
+            format,
+            stock
+        },{headers: {"Authorization": `${token}`}})
     }
 
     getAllAlbums(){
@@ -155,6 +180,7 @@ class ApiService extends Component{
     logout(){
         sessionStorage.removeItem('authenticatedUser')
         sessionStorage.removeItem('token')
+        sessionStorage.removeItem('isUserAdmin')
         // history.props.push('/')
         return <Redirect to='/'/>
     }

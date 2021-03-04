@@ -16,6 +16,8 @@ const MainPageProducts = () => {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [currentValue, setCurrentValue] = React.useState("");
   const [hasSearchBeenClicked, setHasSearchBeenClicked] = React.useState(false)
+  const [hasAddBeenClicked, setHasAddBeenClicked] = React.useState(false)
+  const [addItemMessage, setAddItemMessage] = React.useState("")  
 
   const history = useHistory();
 
@@ -64,6 +66,10 @@ const MainPageProducts = () => {
       cardCount = 1;
     }
 
+    setHasAddBeenClicked(true)
+
+    setAddItemMessage(title)
+
     console.log(title);
     ApiService.createNewAlbumInCart(title, cardCount)
       .then((response) => {})
@@ -109,7 +115,7 @@ const MainPageProducts = () => {
             <Card.Text>${card.price}</Card.Text>
             {/* <Card.Text>{card.songs.map((song) => <text>{song.songName}</text>)}</Card.Text> */}
             <Form className="form-select form-select-sm" >
-                <select onChange={e => cardCount = e.target.value}id = "dropdown" value={cardCount}>
+                <select onChange={e => cardCount = e.target.value} id = "dropdown" value={cardCount}>
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -150,7 +156,9 @@ const MainPageProducts = () => {
 
   return (
    
+    
     <div style={{ paddingTop: "85px"}}>
+        {hasAddBeenClicked && <h1><div className="alert alert-success">{addItemMessage +" added to cart!"}</div></h1>}
       <h1>Search for Album</h1>
       <SearchField
         color='black'

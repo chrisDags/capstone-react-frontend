@@ -18,11 +18,21 @@ export default class EditAlbumComponent extends Component {
             format: '',
             stock: ''
         };
+
+        
+
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.priceChange = this.priceChange.bind(this)
+        this.titleChange = this.titleChange.bind(this)
+        this.artistChange = this.artistChange.bind(this)
+        this.descriptionChange = this.descriptionChange.bind(this)
+        this.genreChange = this.genreChange.bind(this)
+        this.formatChange = this.formatChange.bind(this)
     }
 
     
     componentDidMount(){
-
+        
         console.log(this.state.id)
         ApiService.getAlbumById(this.state.id)
         .then(response => this.setState({
@@ -33,15 +43,86 @@ export default class EditAlbumComponent extends Component {
                 genre: response.data.genre,
                 format: response.data.format,
                 stock: response.data.stock
-        }))
+        })).catch(()=>{
+            this.props.history.push('/')
+        })
+    }
+
+    handleSubmit(){
+        ApiService.putChanges(this.state.id, this.state.title, this.state.artist, this.state.description, this.state.price, this.state.genre, this.state.format, this.state.stock).then((response) =>{
+            this.props.history.push('/admin')
+        }).catch(() => {
+            this.props.history.push('/')
+        })
     }
     
+    priceChange(event){
+
+        this.setState({price: event.target.value})
+        console.log(this.state.client)
+
+    }
+
+    titleChange(event){
+
+        this.setState({title: event.target.value})
+        console.log(this.state.client)
+
+    }
+
+    artistChange(event){
+
+        this.setState({artist: event.target.value})
+        console.log(this.state.client)
+
+    }
+
+    descriptionChange(event){
+
+        this.setState({description: event.target.value})
+        console.log(this.state.client)
+
+    }
+
+    genreChange(event){
+
+        this.setState({genre: event.target.value})
+        console.log(this.state.client)
+
+    }
+
+    formatChange(event){
+
+        this.setState({format: event.target.value})
+        console.log(this.state.client)
+
+    }
     
     render() {
         return (
-            <div style={{paddingTop: '200px'}}>
-               hi {this.state.title}
-            </div>
+            <>
+             <div className="form-group" style={{width: "50%", display:"inline-block"}}>
+                <form onSubmit={e => {e.preventDefault() 
+                this.handleSubmit()}}>  
+                   <div style={{paddingTop: '100px'}} className="form-group">    
+                        <h1>Title</h1>
+                        <input type="text" className="form-control" name="client" value={this.state.title}  onChange={this.titleChange}/>              
+                        <h1>Artist</h1>
+                        <input type="text" className="form-control" name="client" value={this.state.artist}  onChange={this.artistChange}/>
+                        <h1>Description</h1>
+                        <input type="text" className="form-control" name="client" value={this.state.description}  onChange={this.descriptionChange}/>
+                        <h1>Price</h1>
+                        <input type="text" className="form-control" name="client" value={this.state.price}  onChange={this.priceChange}/ >
+                        <h1>Genre</h1>
+                        <input type="text" className="form-control" name="client" value={this.state.genre}  onChange={this.genreChange}/ >
+                        <h1>Format</h1>
+                        <input type="text" className="form-control" name="client" value={this.state.format}  onChange={this.formatChange}/ >             
+                   </div>  
+                </form>
+                <button className="btn btn-success"  type="button" onClick={() => this.handleSubmit()}>Submit Changes</button>
+                <div style={{paddingTop:"10px"}}><button className="btn btn-primary" onClick={() => this.props.history.push("/finance")}>Return To List</button></div>
+             </div>
+             </>
         )
     }
 }
