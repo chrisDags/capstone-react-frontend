@@ -17,7 +17,6 @@ const NavBar = () => {
 
   }
 
-
   return (
     <div className="App" style={{position: 'fixed', width:'100%', top:'0', zIndex:'1'}}>
       <ReactBootStrap.Navbar
@@ -49,13 +48,7 @@ const NavBar = () => {
               </ReactBootStrap.Nav.Link>
             </Link>
 
-            {/* <Link to="/admin">
-              <ReactBootStrap.Nav.Link style={{color:'whitesmoke'}}  href="#all">
-               Admin
-              </ReactBootStrap.Nav.Link>
-            </Link> */}
 
-            {/* {this.state.hasLoginFailed && <div className="alert alert-danger">Invalid Credentials</div>} */}
           <Link to="/login"><ReactBootStrap.Nav.Link style={{color:'whitesmoke'}} href="#all">Login</ReactBootStrap.Nav.Link></Link>
           {ApiService.isLoginSuccessfulJwt() && <Link to="/" onClick={toggleMe}><ReactBootStrap.Nav.Link style={{color:'whitesmoke'}} href="#all">Logout</ReactBootStrap.Nav.Link></Link>}
           {sessionStorage.getItem('isUserAdmin') && <Link to="/admin"><ReactBootStrap.Nav.Link style={{color:'whitesmoke'}}  href="#all"> Admin </ReactBootStrap.Nav.Link></Link>}

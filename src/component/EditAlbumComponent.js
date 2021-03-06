@@ -33,6 +33,7 @@ export default class EditAlbumComponent extends Component {
     
     componentDidMount(){
         
+
         console.log(this.state.id)
         ApiService.getAlbumById(this.state.id)
         .then(response => this.setState({

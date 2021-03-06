@@ -9,7 +9,19 @@ class ApiService extends Component{
     }
 
 
-    createNewOrder(creditCard, creditCardName, cvv, expirationDate, shippingAddress, billingAddress){
+    createOrderItem(title, quantity, price, id){
+        let token = sessionStorage.getItem('token')
+
+        return axios.post("http://localhost:8080/order/item",{
+            title,
+            quantity,
+            price,
+            id
+        }, {headers: {"Authorization": `${token}`}})
+    }
+    
+
+    createNewOrder(creditCard, creditCardName, cvv, expirationDate, shippingAddress, billingAddress, total){
         let token = sessionStorage.getItem('token')
         return axios.post("http://localhost:8080/order", {
             creditCard,
@@ -17,7 +29,8 @@ class ApiService extends Component{
             cvv,
             expirationDate,
             shippingAddress,
-            billingAddress
+            billingAddress, 
+            total
         },{headers: {"Authorization": `${token}`}})
     }
 
@@ -181,7 +194,6 @@ class ApiService extends Component{
         sessionStorage.removeItem('authenticatedUser')
         sessionStorage.removeItem('token')
         sessionStorage.removeItem('isUserAdmin')
-        // history.props.push('/')
         return <Redirect to='/'/>
     }
 
