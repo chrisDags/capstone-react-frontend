@@ -8,6 +8,21 @@ class ApiService extends Component{
         super(props)
     }
 
+    // getCartItem(id){
+    //     let token = sessionStorage.getItem('token')
+
+    //     return axios.get(`http://localhost:8080/cart/${id}`, {headers: {"Authorization": `${token}`}})
+    // }
+
+
+    // updateCartItemQuantity(id, quantity){
+    //     let token = sessionStorage.getItem('token')
+
+    //     return axios.put(`http://localhost:8080/cart/${id}`, {
+    //         id,
+    //         quantity
+    //     }, {headers: {"Authorization": `${token}`}})
+    // }
 
     createOrderItem(title, quantity, price, id){
         let token = sessionStorage.getItem('token')
@@ -19,7 +34,6 @@ class ApiService extends Component{
             id
         }, {headers: {"Authorization": `${token}`}})
     }
-    
 
     createNewOrder(creditCard, creditCardName, cvv, expirationDate, shippingAddress, billingAddress, total){
         let token = sessionStorage.getItem('token')
@@ -104,7 +118,6 @@ class ApiService extends Component{
     }
 
     getAlbumByName(name){
-        // let token = sessionStorage.getItem('token')
         return axios.get(`http://localhost:8080/albums/${name}`)
     }
 
@@ -151,10 +164,6 @@ class ApiService extends Component{
         return true
     }
 
-
-    // registerSuccessfulLogin(){
-    //     sessionStorage.setItem('loginSuccess', true)
-    // }
 
     registerSuccessfulLoginJwt(username, token){
         sessionStorage.setItem('authenticatedUser', username)

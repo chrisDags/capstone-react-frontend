@@ -4,9 +4,7 @@ import { Card } from "react-bootstrap";
 import ApiService from "./ApiService.jsx";
 import { useHistory } from "react-router";
 import SearchField from "react-search-field";
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown'
-import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
@@ -14,15 +12,11 @@ import 'bootstrap/dist/js/bootstrap.js';
 const MainPageProducts = () => {
   const [albums, setAlbums] = useState([]);
   const [searchQuery, setSearchQuery] = React.useState("");
-  const [currentValue, setCurrentValue] = React.useState("");
   const [hasSearchBeenClicked, setHasSearchBeenClicked] = React.useState(false)
   const [hasAddBeenClicked, setHasAddBeenClicked] = React.useState(false)
   const [addItemMessage, setAddItemMessage] = React.useState("")  
 
   const history = useHistory();
-
-  const items = 0;
-
 
   useEffect(() => {
     ApiService.getAllTasks().then((response) => {

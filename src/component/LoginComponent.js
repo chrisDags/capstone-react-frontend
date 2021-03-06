@@ -1,4 +1,3 @@
-// import { Component } from "react";
 import './LoginComponent.css'
 import './ApiService.jsx'
 
@@ -8,7 +7,6 @@ import ApiService from "./ApiService.jsx";
 class LoginComponent extends Component{
     constructor(props){
        
-
         super(props)
         this.state = {
             username: '',
@@ -45,17 +43,6 @@ class LoginComponent extends Component{
 
 
      async handleLogin(){
-        // ApiService.sendLoginRequest(this.state.username, this.state.password)
-        //     .then(response => {
-        //         console.log(this.state.username)
-        //         console.log(this.state.password)
-        //         ApiService.registerSuccessfulLogin()
-        //         // const history = createHistory();
-        //         this.props.history.push('/')
-        
-        //     }).catch(()=>{
-        //         this.setState({hasLoginFailed: true})
-        //     })
 
        await ApiService.sendLoginRequestJwt(this.state.username, this.state.password)
         .then(response => {
@@ -73,38 +60,11 @@ class LoginComponent extends Component{
              }).catch(() =>{
                  this.props.history.push('/')
                  window.location.reload(false);
-             })
-     
-            //   this.props.history.push('/')
-
-
-            // this.props.history.push("/")
-            
-            // console.log(response.data.jwt)
+             })  
 
         }).catch(()=>{
             this.setState({hasLoginFailed: true})
         })
-
-        // if(this.state.hasLoginFailed){
-        //     return
-        // }else{
-        //     this.handleValidation()
-        // }
-
-    //    await ApiService.getIsUserAdmin().then(response =>{
-
-    //        sessionStorage.setItem('isUserAdmin', true) 
-    //         console.log(response.data)
-    //         this.props.history.push('/')
-    //         window.location.reload(false);
-            
-    //     }).catch(() =>{
-    //         this.props.history.push('/')
-    //     })
-
-    //      this.props.history.push('/')
-    //      window.location.reload(false);
       
     } 
     

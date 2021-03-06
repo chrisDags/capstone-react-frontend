@@ -2,9 +2,7 @@ import React from "react";
 import "../App.css";
 import * as ReactBootStrap from "react-bootstrap";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import Cart from "./Cart";
 import ApiService from "./ApiService.jsx";
-import LogoutComponent from "./LogoutComponent";
 import { faShoppingCart} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -53,8 +51,6 @@ const NavBar = () => {
           {ApiService.isLoginSuccessfulJwt() && <Link to="/" onClick={toggleMe}><ReactBootStrap.Nav.Link style={{color:'whitesmoke'}} href="#all">Logout</ReactBootStrap.Nav.Link></Link>}
           {sessionStorage.getItem('isUserAdmin') && <Link to="/admin"><ReactBootStrap.Nav.Link style={{color:'whitesmoke'}}  href="#all"> Admin </ReactBootStrap.Nav.Link></Link>}
           
-          
-
           </ReactBootStrap.Nav>
           <ReactBootStrap.Nav>
           </ReactBootStrap.Nav>

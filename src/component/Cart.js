@@ -1,24 +1,22 @@
-import React,  { useEffect, useState, Input } from "react";
+import React,  { useEffect, useState } from "react";
 import "./Box.css";
 import ApiService from './ApiService.jsx'
 import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngry, faBan, faBarcode, faCode, faCross, faEdit, faEyeDropper, faHighlighter, faSkullCrossbones, faTrash } from '@fortawesome/free-solid-svg-icons';
-import DatePicker from "react-datepicker";
+import {faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 
 const Cart = () => {
     const [albums, setAlbums] = useState([]);
     const [didUserLogin, setDidUserLogin] = React.useState(null);
-    const [creditCard, setCreditCard] = React.useState("");
-    const [creditCardName, setCreditCardName] = React.useState("");
-    const [cvv, setCvv] = React.useState("");
-    const [expirationDate, setExpirationDate] = React.useState("")
-    const [shippingAddress, setShippingAddress] = React.useState("")
-    const [billingAddress, setBillingAddress] = React.useState("")
+    const [creditCard] = React.useState("");
+    const [creditCardName] = React.useState("");
+    const [cvv] = React.useState("");
+    const [expirationDate] = React.useState("")
+    const [shippingAddress] = React.useState("")
+    const [billingAddress] = React.useState("")
     
-    // const [albumNames, setAlbumNames] = React.useState(...[])
 
     var total = 0;
     var username = "";
@@ -29,10 +27,6 @@ const Cart = () => {
     const setUserTotal = (value) =>{
         userTotal = value
     }
-
-    const getUserTotal = () =>{
-        return userTotal;
-    }
     
     username = ApiService.getUsername();
 
@@ -41,38 +35,7 @@ const Cart = () => {
     
 
     const history = useHistory();
-    const items = 0;
-    const [currentTotal, setCurrentTotal] = React.useState(0);
-    const handleNameChange = (event) =>{
-        setCreditCardName(event.target.value)
-        
-    }
-    
-    const handleNumberChange = (event) =>{
-        setCreditCard(event.target.value)
-        
-    }
-    
-    const handleCvvChange = (event) =>{
-        
-        setCvv(event.target.value)
-    }
-    
-    const handleDateChange = (event) =>{
-        setExpirationDate(event.target.value)
-        
-    }
-    
-    const handleShippingChange = (event) =>{
-        
-        setShippingAddress(event.target.value)
-        
-    }
 
-    const handleBillingChange = (event) =>{
-        
-        setBillingAddress(event.target.value)
-    }
     const handleSubmit = () =>{
 
         console.log("REACHED THIS POINT")
@@ -125,13 +88,6 @@ const Cart = () => {
   }
 
 
-  const getLoginValue = () =>{
-    if(ApiService.isLoginSuccessfulJwt()){
-        return true
-    }
-    return false;
-  }  
-
  const renderCard = (card, index) => {
   
     var temp = card.quantity
@@ -153,9 +109,9 @@ const Cart = () => {
                   <td><b>${card.album.price}</b></td>
                   <td><b>{card.quantity}</b></td>
                   <td>
-                        <Link className="nav-link" onClick ={() => history.push(`/item/${card.album.id}`)}>
+                        {/* <Link className="nav-link" onClick ={() => history.push(`/item/${card.album.id}`)}>
                             <FontAwesomeIcon icon={faEdit} transform="down-4 grow-2.5"/>
-                        </Link>  
+                        </Link>   */}
                         <Link className="nav-link" onClick={() => deleteItem(card.id)}>
                             <FontAwesomeIcon icon={faTrash} transform="down-4 grow-2.5" color="darkRed"/>
                         </Link>
@@ -170,7 +126,6 @@ const Cart = () => {
       <>
       {didUserLogin === false && <div style={{paddingTop: '55px'}}><h1>Please Login</h1> <button className="btn btn-primary" onClick={ () => history.push('/login')}>Login Page</button> </div>}
       {didUserLogin && <div> <h1 style={{paddingTop: '100px'}}> {username}'s Cart</h1></div>}
-       {/* {total === 0 && <div><b>Your Cart is Empty!</b></div>} */}
       {didUserLogin && <div><table className="table table-striped" style={{width: '70%', marginLeft: 'auto', marginRight: 'auto' }}><thead className="thead-dark"><tr><th>#</th> <th>TITLE</th><th>FORMAT</th><th>PRICE</th> <th>QUANTITY</th><th></th></tr></thead>{albums.map(renderCard)}</table><div style={{color: 'darkRed'}}><b>Your Total ${total}</b></div>{total !== 0 && <button onClick={() => history.push({pathname: "/checkout",
       
           state: {

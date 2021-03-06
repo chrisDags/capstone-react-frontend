@@ -1,27 +1,21 @@
 import React,  { useEffect, useState } from "react";
 import "./Box.css";
-import { Card } from "react-bootstrap";
-import axios from "axios";
 import ApiService from './ApiService.jsx'
-import { Redirect, useHistory } from "react-router";
+import { useHistory } from "react-router";
 import { Link } from 'react-router-dom';
-import SearchField from "react-search-field";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngry, faBan, faBarcode, faCode, faCross, faEdit, faEyeDropper, faHighlighter, faSkullCrossbones, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const Cart = () => {
     const [albums, setAlbums] = useState([]);
     const [didUserLogin, setDidUserLogin] = React.useState(null);
 
-    var total = 0;
     var username = "";
     var id = 0;
     username = ApiService.getUsername();
     
     const history = useHistory();
 
-    const items = 0;
-    const [currentTotal, setCurrentTotal] = React.useState(0);
 
     useEffect(() => {
       ApiService.getAllAlbums().then(response => {
@@ -36,8 +30,6 @@ const Cart = () => {
 
       console.log(albums);
     }, []);
-
-  
     
 
   const deleteItem = (id) =>{
@@ -59,12 +51,6 @@ const Cart = () => {
   }
 
 
-  const getLoginValue = () =>{
-    if(ApiService.isLoginSuccessfulJwt()){
-        return true
-    }
-    return false;
-  }  
 
  const renderCard = (card, index) => {
 
@@ -81,14 +67,13 @@ const Cart = () => {
                   <td>{card.price}</td>
                   <td>{card.artist}</td>
                   <td>{card.description}</td>
-                  <td>{card.stock}</td>
                   <td>
                         <Link className="nav-link" to={`/edit/${card.id}`}>
                             <FontAwesomeIcon icon={faEdit} transform="down-4 grow-2.5"/>
                         </Link>                                          
-                        <Link className="nav-link" onClick={() => deleteItem(card.id)}>
+                        {/* <Link className="nav-link" onClick={() => deleteItem(card.id)}>
                             <FontAwesomeIcon icon={faTrash} transform="down-4 grow-2.5" color="darkRed"/>
-                        </Link>
+                        </Link> */}
                   </td>                                          
               </tr>    
           }     

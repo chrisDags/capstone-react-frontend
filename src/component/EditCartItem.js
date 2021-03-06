@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Form, Formik, Field, ErrorMessage } from 'formik'
 import ApiService from './ApiService';
 
 
@@ -9,35 +8,48 @@ export default class EditCartItem extends Component {
         super(props);
         this.state = {
             id: this.props.match.params.id,
-            album: [],
-            quantity: "input" 
+            cartItem: [],
+            quantity: "0"
         };
 
         this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
         
     componentDidMount(){
         console.log(this.state.id)
-         ApiService.getAlbumById(this.state.id).then(response =>{
+         ApiService.getCartItem(this.state.id).then(response =>{
             this.setState({
-                album: [response.data]
+                cartItem: [response.data]
             })   
          }).catch(() => this.props.history.push('/cart'))
          
-         this.state.album.map((item) => this.setState({quantity: item.quantity}))     
+         this.state.cartItem.map((item) => this.setState({quantity: item.quantity}))     
     }
 
     handleChange(event){
         this.setState({quantity: event.target.value})
     }
 
+    handleSubmit(){
+        console.log("here: "+this.state.quantity)
+        ApiService.updateCartItemQuantity(this.state.id, this.state.quantity).then(response =>{
+            this.props.history.push("/cart")
+        }).catch(error =>{
+            this.setState({
+                hasError: true
+            })
+        })
+    }
+
     render() {
         return (
-
-            <div className="form-group" style={{width: "50%", display:"inline-block", paddingTop: "110px"}}>
             
+            <div className="form-group" style={{width: "50%", display:"inline-block", paddingTop: "110px"}}>       
+                {this.state.hasError && <h1>Error: Please enter a valid quantity</h1>}
                 <h1>Change Quantity</h1>
-                <input type="text" className="form-control" name="quantity" value={this.state.quantity}  onChange={this.handleChange}/ >
+                <input type="number" min="1" max="100" className="form-control" name="quantity" value={this.state.quantity}  onChange={this.handleChange}/ >
+                <div style={{paddingTop: "20px"}}><button className="btn btn-success" onClick={this.handleSubmit}>Update</button></div>
             </div>
         )
     }

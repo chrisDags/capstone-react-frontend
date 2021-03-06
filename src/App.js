@@ -1,14 +1,11 @@
 import React from 'react';
 import "./App.css"
-import * as ReactBootStrap from "react-bootstrap";
 import Navbar from "./component/Navbar";
 import MainPageProducts from "./component/MainPageProducts";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  BrowswerHistory,
-  Link
+  Route
 } from "react-router-dom";
 import Details from './component/Details';
 import LoginComponent from './component/LoginComponent';
@@ -18,7 +15,6 @@ import Admin from './component/Admin';
 import EditAlbumComponent from './component/EditAlbumComponent';
 import CheckoutComponent from './component/CheckoutComponent';
 import EditCartItem from './component/EditCartItem';
-// import { createHistory } from 'history/createBrowserHistory';
 
 
 const NavBar = () => {
@@ -29,7 +25,7 @@ const NavBar = () => {
          <Switch>
           <Route path="/Login" component={LoginComponent}/>    
           <Route path="/cart" component={Cart}/>
-          <Route path="/item/:id" component={EditCartItem}/>
+          {/* <Route path="/item/:id" component={EditCartItem}/> */}
           <Route path="/admin" component={Admin}/>
           <Route path="/edit/:id" component={EditAlbumComponent}/>
           <Route path="/logout" component={LogoutComponent}/>

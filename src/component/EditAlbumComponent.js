@@ -1,7 +1,6 @@
 import React from 'react'
 
 import  { Component } from 'react'
-import { Form, Formik, Field, ErrorMessage } from 'formik'
 import ApiService from './ApiService';
 
 export default class EditAlbumComponent extends Component {
@@ -15,12 +14,11 @@ export default class EditAlbumComponent extends Component {
             description: '',
             price: '',
             genre: '',
-            format: '',
-            stock: ''
+            format: ''
+           
         };
 
-        
-
+    
         this.handleSubmit = this.handleSubmit.bind(this)
         this.priceChange = this.priceChange.bind(this)
         this.titleChange = this.titleChange.bind(this)
@@ -30,10 +28,9 @@ export default class EditAlbumComponent extends Component {
         this.formatChange = this.formatChange.bind(this)
     }
 
-    
+
     componentDidMount(){
         
-
         console.log(this.state.id)
         ApiService.getAlbumById(this.state.id)
         .then(response => this.setState({
@@ -42,8 +39,7 @@ export default class EditAlbumComponent extends Component {
                 description: response.data.description,
                 price: response.data.price,
                 genre: response.data.genre,
-                format: response.data.format,
-                stock: response.data.stock
+                format: response.data.format
         })).catch(()=>{
             this.props.history.push('/')
         })
@@ -107,17 +103,17 @@ export default class EditAlbumComponent extends Component {
                 this.handleSubmit()}}>  
                    <div style={{paddingTop: '100px'}} className="form-group">    
                         <h1>Title</h1>
-                        <input type="text" className="form-control" name="client" value={this.state.title}  onChange={this.titleChange}/>              
+                        <input type="text" className="form-control" value={this.state.title}  onChange={this.titleChange}/>              
                         <h1>Artist</h1>
-                        <input type="text" className="form-control" name="client" value={this.state.artist}  onChange={this.artistChange}/>
+                        <input type="text" className="form-control" value={this.state.artist}  onChange={this.artistChange}/>
                         <h1>Description</h1>
-                        <input type="text" className="form-control" name="client" value={this.state.description}  onChange={this.descriptionChange}/>
+                        <input type="text" className="form-control" value={this.state.description}  onChange={this.descriptionChange}/>
                         <h1>Price</h1>
-                        <input type="text" className="form-control" name="client" value={this.state.price}  onChange={this.priceChange}/ >
+                        <input type="number" className="form-control" min="1" name="client" value={this.state.price}  onChange={this.priceChange}/ >
                         <h1>Genre</h1>
-                        <input type="text" className="form-control" name="client" value={this.state.genre}  onChange={this.genreChange}/ >
+                        <input type="text" className="form-control" value={this.state.genre}  onChange={this.genreChange}/ >
                         <h1>Format</h1>
-                        <input type="text" className="form-control" name="client" value={this.state.format}  onChange={this.formatChange}/ >             
+                        <input type="text" className="form-control" value={this.state.format}  onChange={this.formatChange}/ >             
                    </div>  
                 </form>
                 <button className="btn btn-success"  type="button" onClick={() => this.handleSubmit()}>Submit Changes</button>

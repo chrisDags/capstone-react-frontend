@@ -1,4 +1,3 @@
-import { setNestedObjectValues } from 'formik';
 import React, {useEffect} from 'react'
 import ApiService from './ApiService';
 import { useHistory } from "react-router-dom";
@@ -15,8 +14,6 @@ const CheckoutComponent = (props) => {
 
     const history = useHistory();
     const [hasErrors, setHasErrors] = React.useState(false)
-
-    const [isOrderSuccessful, setIsOrderSuccessful] = React.useState(false)
 
     useEffect(() => {
         ApiService.getAllFromCart().then(response => {
@@ -94,7 +91,6 @@ const CheckoutComponent = (props) => {
         console.log("REACHED THIS POINT")
 
         if(creditCard === "" || creditCardName === "" || cvv === "" || expirationDate === "" || shippingAddress === ""|| billingAddress === ""){
-            //history.push("/cart")
             setHasErrors(true)
             return
         }else{

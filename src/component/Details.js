@@ -19,8 +19,7 @@ export default class Details extends Component {
                  client: this.props.location.state.client, 
                  description: this.props.location.state.description})
         }
-    }
-    
+    } 
     
     render() {
         return (
