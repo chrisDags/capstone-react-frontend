@@ -17,7 +17,6 @@ export default class EditCartItem extends Component {
     }
         
     componentDidMount(){
-        console.log(this.state.id)
          ApiService.getCartItem(this.state.id).then(response =>{
             this.setState({
                 cartItem: [response.data]
@@ -32,7 +31,6 @@ export default class EditCartItem extends Component {
     }
 
     handleSubmit(){
-        console.log("here: "+this.state.quantity)
         ApiService.updateCartItemQuantity(this.state.id, this.state.quantity).then(response =>{
             this.props.history.push("/cart")
         }).catch(error =>{

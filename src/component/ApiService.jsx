@@ -81,7 +81,6 @@ class ApiService extends Component{
     deleteAlbumById(id){
         let token = sessionStorage.getItem('token')
 
-        console.log("it was called")
         return axios.delete(`http://localhost:8080/albums/${id}`,{headers: {"Authorization": `${token}`}})
     }
 
@@ -102,10 +101,6 @@ class ApiService extends Component{
     createNewAlbumInCart(title, quantity){
 
         let token = sessionStorage.getItem('token')
-
-        console.log( "MY TOKEN HERE" + token)
-
-        console.log("quantity before hitting the backend " + quantity )
 
         return axios.post("http://localhost:8080/cart", {
             title,
@@ -173,7 +168,6 @@ class ApiService extends Component{
 
     getUsername(){
         let username = sessionStorage.getItem('authenticatedUser')
-        console.log("HERE" + username)
         return username
     }
 
@@ -181,8 +175,6 @@ class ApiService extends Component{
     isLoginSuccessfulJwt(){
         let userJwt = sessionStorage.getItem('token')
         
-        console.log("successful!")
-
         if(userJwt === null){
             return false
         }

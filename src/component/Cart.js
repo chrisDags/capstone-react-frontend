@@ -38,7 +38,6 @@ const Cart = () => {
 
     const handleSubmit = () =>{
 
-        console.log("REACHED THIS POINT")
 
         if(creditCard === "" || creditCardName === null || cvv === null || expirationDate === null || shippingAddress === null || billingAddress === null){
             history.push("/cart")
@@ -60,14 +59,11 @@ const Cart = () => {
 
       if(ApiService.isLoginSuccessfulJwt()){
         
-        console.log("THIS RETURNS TRUE")
         setDidUserLogin(true)
       }else{
-          console.log("RETURNED FALSE")
           setDidUserLogin(false)
       }
 
-      console.log(albums);
     }, []);
 
   const deleteItem = (id) =>{

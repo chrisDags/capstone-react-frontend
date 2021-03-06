@@ -47,8 +47,6 @@ const CheckoutComponent = (props) => {
 
     const postCartItems = (orders) =>{
 
-        console.log(orders.id)
-
         let id = orders.id
     
 
@@ -88,7 +86,6 @@ const CheckoutComponent = (props) => {
 
    const handleSubmit = () =>{
 
-        console.log("REACHED THIS POINT")
 
         if(creditCard === "" || creditCardName === "" || cvv === "" || expirationDate === "" || shippingAddress === ""|| billingAddress === ""){
             setHasErrors(true)
@@ -102,7 +99,6 @@ const CheckoutComponent = (props) => {
         ApiService.createNewOrder(creditCard,creditCardName,cvv,expirationDate,shippingAddress,billingAddress, mytotal).then(resp =>{
             
             postCartItems(resp.data)
-            console.log(resp.data)
             
             history.push("/")
             alert("Order Completed!")            

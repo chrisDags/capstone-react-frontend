@@ -31,7 +31,6 @@ export default class EditAlbumComponent extends Component {
 
     componentDidMount(){
         
-        console.log(this.state.id)
         ApiService.getAlbumById(this.state.id)
         .then(response => this.setState({
                 title: response.data.title,
@@ -56,42 +55,36 @@ export default class EditAlbumComponent extends Component {
     priceChange(event){
 
         this.setState({price: event.target.value})
-        console.log(this.state.client)
 
     }
 
     titleChange(event){
 
         this.setState({title: event.target.value})
-        console.log(this.state.client)
 
     }
 
     artistChange(event){
 
         this.setState({artist: event.target.value})
-        console.log(this.state.client)
 
     }
 
     descriptionChange(event){
 
         this.setState({description: event.target.value})
-        console.log(this.state.client)
 
     }
 
     genreChange(event){
 
         this.setState({genre: event.target.value})
-        console.log(this.state.client)
 
     }
 
     formatChange(event){
 
         this.setState({format: event.target.value})
-        console.log(this.state.client)
 
     }
     

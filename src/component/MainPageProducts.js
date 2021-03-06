@@ -23,7 +23,6 @@ const MainPageProducts = () => {
       setAlbums(response.data);
     }).catch();
 
-    console.log(albums);
   }, []);
 
 
@@ -50,7 +49,6 @@ const MainPageProducts = () => {
         setAlbums(response.data);
       })
       .catch(() => {});
-    console.log(e);
   };
 
   const onAddClicked = (title, cardCount) => {
@@ -64,7 +62,6 @@ const MainPageProducts = () => {
 
     setAddItemMessage(title)
 
-    console.log(title);
     ApiService.createNewAlbumInCart(title, cardCount)
       .then((response) => {})
       .catch(() => {
@@ -79,7 +76,6 @@ const MainPageProducts = () => {
   };
 
   const renderCard = (card, index) => {
-    console.log(albums);
 
     var imageToShow = "";
     var cardCount;
@@ -90,8 +86,6 @@ const MainPageProducts = () => {
     } else {
       imageToShow = "./cover-art.jpg";
     }
-
-    console.log(cardCount)
 
     return (
       <div style={{ display: "flex", justifyContent: "center" }}>
@@ -126,7 +120,7 @@ const MainPageProducts = () => {
                 Add to Cart
               </button>
             </div>
-            <div>{console.log(cardCount)}</div>
+            <div>{}</div>
             <button
               className="btn btn-primary"
               onClick={() =>

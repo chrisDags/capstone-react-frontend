@@ -22,11 +22,9 @@ class LoginComponent extends Component{
     }
 
     componentDidMount(){
-        console.log("Login component mounted")
     }
 
     componentDidUpdate(){
-        console.log("Login component updated.")
     }
 
 
@@ -46,14 +44,12 @@ class LoginComponent extends Component{
 
        await ApiService.sendLoginRequestJwt(this.state.username, this.state.password)
         .then(response => {
-            console.log(this.state.username)
-            console.log(this.state.password)
+
             ApiService.registerSuccessfulLoginJwt(this.state.username, response.data.jwt);
 
             ApiService.getIsUserAdmin().then(response =>{
 
                 sessionStorage.setItem('isUserAdmin', true) 
-                 console.log(response.data)
                  this.props.history.push('/')
                  window.location.reload(false);
                  

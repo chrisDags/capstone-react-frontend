@@ -28,7 +28,6 @@ const Cart = () => {
           setDidUserLogin(false)
       }
 
-      console.log(albums);
     }, []);
     
 
@@ -56,9 +55,7 @@ const Cart = () => {
 
     return (
         <tbody>
-          {
-
-          
+          {     
           <tr key = {card.id}>
                   <td>{id = id + 1}</td>
                   <td>{card.title}</td>
