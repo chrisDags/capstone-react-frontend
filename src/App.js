@@ -25,7 +25,7 @@ const NavBar = () => {
          <Switch>
           <Route path="/Login" component={LoginComponent}/>    
           <Route path="/cart" component={Cart}/>
-          {/* <Route path="/item/:id" component={EditCartItem}/> */}
+          <Route path="/item" component={EditCartItem}/>
           <Route path="/admin" component={Admin}/>
           <Route path="/edit/:id" component={EditAlbumComponent}/>
           <Route path="/logout" component={LogoutComponent}/>

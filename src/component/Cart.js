@@ -16,6 +16,8 @@ const Cart = () => {
     const [expirationDate] = React.useState("")
     const [shippingAddress] = React.useState("")
     const [billingAddress] = React.useState("")
+
+    const [cartItemId] = React.useState("")
     
 
     var total = 0;
@@ -105,9 +107,9 @@ const Cart = () => {
                   <td><b>${card.album.price}</b></td>
                   <td><b>{card.quantity}</b></td>
                   <td>
-                        {/* <Link className="nav-link" onClick ={() => history.push(`/item/${card.album.id}`)}>
+                        <Link className="nav-link" to={{pathname:`/item`, state:{quantity: card.quantity, cartId: card.id, title: card.album.title},}}>
                             <FontAwesomeIcon icon={faEdit} transform="down-4 grow-2.5"/>
-                        </Link>   */}
+                        </Link>  
                         <Link className="nav-link" onClick={() => deleteItem(card.id)}>
                             <FontAwesomeIcon icon={faTrash} transform="down-4 grow-2.5" color="darkRed"/>
                         </Link>

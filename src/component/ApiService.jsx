@@ -15,14 +15,14 @@ class ApiService extends Component{
     // }
 
 
-    // updateCartItemQuantity(id, quantity){
-    //     let token = sessionStorage.getItem('token')
+    updateCartItemQuantity(id, quantity){
+        let token = sessionStorage.getItem('token')
+        console.log('here' + quantity)
 
-    //     return axios.put(`http://localhost:8080/cart/${id}`, {
-    //         id,
-    //         quantity
-    //     }, {headers: {"Authorization": `${token}`}})
-    // }
+        return axios.put(`http://localhost:8080/cart/${id}`, {
+            quantity
+        }, {headers: {"Authorization": `${token}`}})
+    }
 
     getAllSongsByAlbumId(id){
         let token = sessionStorage.getItem('token')
