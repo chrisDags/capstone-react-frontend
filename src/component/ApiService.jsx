@@ -24,6 +24,11 @@ class ApiService extends Component{
     //     }, {headers: {"Authorization": `${token}`}})
     // }
 
+    getAllSongsByAlbumId(id){
+        let token = sessionStorage.getItem('token')
+        return axios.get(`http://localhost:8080/albums/songs/${id}`, {headers: {"Authorization": `${token}`}})
+    }
+
     createOrderItem(title, quantity, price, id){
         let token = sessionStorage.getItem('token')
 

@@ -84,7 +84,7 @@ const Cart = () => {
       {didUserLogin && <div> <h1 style={{paddingTop: '100px'}}> Modify Album List</h1></div>}
       {didUserLogin && <div><table className="table table-striped" style={{width: '100%', marginLeft: 'auto', marginRight: 'auto' }}>
       <thead className="thead-dark"><tr><th>#</th> <th>TITLE</th><th>FORMAT</th><th>GENRE</th><th>PRICE</th>
-       <th>ARTIST</th><th>DESCRIPTION</th><th>Available</th><th></th></tr></thead>{albums.map(renderCard)}</table></div>}
+       <th>ARTIST</th><th>DESCRIPTION</th><th></th></tr></thead>{albums.map(renderCard)}</table></div>}
       
     </>
     )

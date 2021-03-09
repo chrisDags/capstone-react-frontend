@@ -101,6 +101,7 @@ const MainPageProducts = () => {
             <Card.Title style={{ fontSize: "35px" }}>{card.title}</Card.Title>
             <Card.Text>{card.artist}</Card.Text>
             <Card.Text>${card.price}</Card.Text>
+            {/* <Card.Text>{card.songs.map(item => item.songName)}</Card.Text> */}
             {/* <Card.Text>{card.songs.map((song) => <text>{song.songName}</text>)}</Card.Text> */}
             <Form className="form-select form-select-sm" >
                 <select onChange={e => cardCount = e.target.value} id = "dropdown" value={cardCount}>
@@ -127,10 +128,12 @@ const MainPageProducts = () => {
                 history.push({
                   pathname: "/details",
                   state: {
+                    genre: card.genre,  
+                    id: card.id,  
                     title: card.title,
                     artist: card.artist,
                     price: card.price,
-                    description: card.description,
+                    description: card.description     
                   },
                 })
               }
